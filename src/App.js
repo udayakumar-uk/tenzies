@@ -19,7 +19,7 @@ export default function App(){
     function toggleDies(die){
         setDies(prev => (prev.map(cardDie => cardDie.id === die.id ? {...cardDie, isTrigger: !cardDie.isTrigger} : cardDie)));
         
-        if(gameStart < 1){
+        if(gameStart < 1 || finish){
           setTimerSec();
           setGameStart(1)
         }
@@ -30,7 +30,12 @@ export default function App(){
       let num = 0;
       let min = '00';
       
-      setInterval(() => {
+      if(finish){
+        clearInterval(timer);
+        return
+      }
+
+      var timer = setInterval(() => {
           sec++;
           if(sec > 59){
             num++;
@@ -42,6 +47,7 @@ export default function App(){
           sec = (sec < 10) ? '0' + sec : (sec > 59) ? '00' : sec;
           setTimer(min + ':' + sec);
       }, 1000);
+
     }
 
     function getRandom(){
