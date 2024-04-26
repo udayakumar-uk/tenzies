@@ -9,46 +9,50 @@ export default function App(){
     const [rolls, setTRolls] = useState(0);
     const [timer, setTimer] = useState('00:00');
     const [gameStart, setGameStart] = useState(0);
+    const [getIntId, setIntId] = useState(0);
     
     useEffect(()=>{
         let isFinish = dies.every(die => die.isTrigger);
         let sameVal = dies.every(die => die.value === dies[0].value);
         setFinish(isFinish && sameVal);
-    }, [dies])
+
+        
+        if(gameStart === 1){
+          
+          let sec = 0;
+          let num = 0;
+          let min = '00';
+              
+          const timer = setInterval(() => {
+              sec++;
+              if(sec > 59){
+                num++;
+                min = '0'+num;
+                if(min > 9){
+                  min = num;
+                }
+              }
+              sec = (sec < 10) ? '0' + sec : (sec > 59) ? '00' : sec;
+              setTimer(min + ':' + sec);
+          }, 1000);
+          
+          setIntId(timer)
+        }
+        
+        return () => {
+          if(isFinish && sameVal){
+            clearInterval(getIntId)
+          }
+        }
+
+
+    }, [dies, finish])
 
     function toggleDies(die){
         setDies(prev => (prev.map(cardDie => cardDie.id === die.id ? {...cardDie, isTrigger: !cardDie.isTrigger} : cardDie)));
-        
-        if(gameStart < 1 || finish){
-          setTimerSec();
-          setGameStart(1)
-        }
+        setGameStart(preVal => preVal + 1)
     }
 
-    function setTimerSec(){
-      let sec = 0;
-      let num = 0;
-      let min = '00';
-      
-      if(finish){
-        clearInterval(timer);
-        return
-      }
-
-      var timer = setInterval(() => {
-          sec++;
-          if(sec > 59){
-            num++;
-            min = '0'+num;
-            if(min > 9){
-              min = num;
-            }
-          }
-          sec = (sec < 10) ? '0' + sec : (sec > 59) ? '00' : sec;
-          setTimer(min + ':' + sec);
-      }, 1000);
-
-    }
 
     function getRandom(){
         return Math.floor(Math.random() * 6) + 1; 
@@ -63,7 +67,9 @@ export default function App(){
       let someVal = dies.some(die => die.isTrigger === true);
       if(finish){
         gameRestart()
-        setTRolls(prev => 0);
+        setTRolls(0);
+        setTimer('00:00')
+        setGameStart(0)
       }else{
         setDies(prev => (prev.map(cardDie => !cardDie.isTrigger ? {...cardDie, value: getRandom()} : cardDie)))
         setTRolls(prev => someVal ? prev + 1 : 0);
