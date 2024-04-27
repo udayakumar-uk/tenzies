@@ -1,15 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
 
 
 html, body {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0;
+  font-variation-settings: "slnt" 0;  
   font-size: 14px;
   margin: 0;
-  background-color: #fff3dd;
+  background-color: #f7f0e4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root{
+  display: flex;
+  height: 100vh;
+  align-items: center;
 }
 
 .dies-wrapper{
@@ -18,7 +38,7 @@ html, body {
 }
 .dies-parent.finished{
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .dies-parent{
@@ -31,7 +51,7 @@ html, body {
 
 .dies-parent img{
   border-radius: 10px;
-  width: 70px;
+  max-width: 70px;
 }
 .button-wrapper{
   text-align: center;
@@ -53,4 +73,25 @@ html, body {
 .status-flex{
   display: flex;
   justify-content: space-between;
+}
+
+.win-title{
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 0;
+  color: #20253f;
+}
+
+.status-flex > p{
+  margin-top: 0;
+  padding: 5px 10px;
+  border: 1px solid #d1bcaa;
+  border-radius: 4px;
+}
+
+.win-content{
+  font-size: 1.1rem;
+  color: #373946;
+  text-align: center;
+  padding: 1rem;
 }
