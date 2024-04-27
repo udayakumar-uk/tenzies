@@ -42,6 +42,7 @@ export default function App(){
         
         return () => {
           if(isFinish && sameVal){
+            navigator.vibrate(1500);
             clearInterval(getIntId)
           }
         }
@@ -75,7 +76,7 @@ export default function App(){
         setDies(prev => (prev.map(cardDie => !cardDie.isTrigger ? {...cardDie, value: getRandom()} : cardDie)))
         setTRolls(prev => someVal ? prev + 1 : 0);
       }
-      navigator.vibrate(30);
+      navigator.vibrate(50);
     }
 
     const dieCards = dies.map(die => <div className="die--card" key={die.id} style={die.isTrigger ? {color: '#75e9dd'}: {}} onClick={() => toggleDies(die)}><img src={die.isTrigger ? `../img/dies-filled-${die.value}.webp` : `../img/dies-outline-${die.value}.webp`} alt={die.id} /></div>)
