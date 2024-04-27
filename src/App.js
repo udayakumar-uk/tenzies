@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import Dies from './Dies'
 import Confetti from 'react-confetti';
 import './App.css';
-import WonBg from './img/won-bg.gif'
 
 export default function App(){
 
@@ -82,6 +81,7 @@ export default function App(){
 
     return(
         <div className="dies-wrapper">
+            <h3 className="win-title">Tenzies</h3>
             {finish && <Confetti />}
             {finish && <h3 className="win-title">🎉 You win! 🎉</h3>}
             {!finish && <p className="win-content">Keep rolling the dice until they all show the same number. Click on each die to lock its current value before rolling again.</p>}
