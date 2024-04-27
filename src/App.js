@@ -74,7 +74,8 @@ export default function App(){
       }else{
         setDies(prev => (prev.map(cardDie => !cardDie.isTrigger ? {...cardDie, value: getRandom()} : cardDie)))
         setTRolls(prev => someVal ? prev + 1 : 0);
-        }
+      }
+      navigator.vibrate(30);
     }
 
     const dieCards = dies.map(die => <div className="die--card" key={die.id} style={die.isTrigger ? {color: '#75e9dd'}: {}} onClick={() => toggleDies(die)}><img src={die.isTrigger ? `../img/dies-filled-${die.value}.webp` : `../img/dies-outline-${die.value}.webp`} alt={die.id} /></div>)
